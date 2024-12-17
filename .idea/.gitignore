@@ -1,0 +1,22 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+
+#ignore django migrations
+**/migrations/**
+
+#ignore virtual environment
+venv/
+env/
+.venv/
+
+#ignore IDE files
+.idea/
+.vscode/
+
+#Ignore database
+db.sqlite3
+
+#ignore secrets
+.env

@@ -1,0 +1,99 @@
+{% extends 'main/base.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'assets/css/gallery.css' %}" rel="stylesheet">
+<link href="{% static 'assets/js/gallery.js' %">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link href="{% static 'assets/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+
+<div class="desktop_7" unique-script-id="w-w-dm-id">
+  <div class="responsive-container-block bigContainer">
+    <div class="responsive-container-block Container">
+      <p class="text-blk headingText">
+        Gallery
+      </p>
+      <div class="responsive-container-block optionsContainer">
+        <p class="text-blk list all active" data-filter="all">
+          Option
+        </p>
+        <p class="text-blk list" data-filter="one">
+          Option
+        </p>
+        <p class="text-blk list" data-filter="two">
+          Option
+        </p>
+        <p class="text-blk list" data-filter="three">
+          Option
+        </p>
+        <p class="text-blk list" data-filter="four">
+          Option
+        </p>
+        <p class="text-blk list" data-filter="four">
+          Option
+        </p>
+      </div>
+      <div class="responsive-container-block imageContainer">
+        {% for image in images %}
+        <div class="project" unique-script-id="w-w-dm-id">
+          <!-- Overlay -->
+          <div id="carouselExampleControls{{ forloop.counter }}" class="carousel slide overlay" data-ride="carousel">
+            <div class="carousel-inner overlay-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{{ image.image.url }}" alt="First slide">
+              </div>
+            </div>
+            <button class="close">
+              Close X
+            </button>
+            <a class="carousel-control-prev" href="#carouselExampleControls{{ forloop.counter }}" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls{{ forloop.counter }}" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <!-- Project Image -->
+          <img class="squareImg one" src="{{ image.image.url }}" alt="Square Image">
+
+          <!-- Button Box -->
+          <div class="btn-box">
+            <button class="btn">View</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(document).ready(function() {
+
+      $("[unique-script-id='w-w-dm-id'] .btn-box").click(function() {
+        $(this).parent().children(".overlay").show();
+
+      });
+
+
+      $("[unique-script-id='w-w-dm-id'] .close").click(function() {
+        $(".overlay").hide();
+      });
+
+      $("[unique-script-id='w-w-dm-id'] .list").click(function() {
+        const value = $(this).attr('data-filter');
+        if (value == 'all') {
+          $("[unique-script-id='w-w-dm-id'] .squareImg").show('1000');
+        } else {
+          $("[unique-script-id='w-w-dm-id'] .squareImg").not('.' + value).hide('1000');
+          $("[unique-script-id='w-w-dm-id'] .squareImg").filter('.' + value).show('1000');
+        }
+      })
+      $("[unique-script-id='w-w-dm-id'] .list").click(function() {
+        $(this).addClass('active').siblings().removeClass('active');
+      })
+    })
+
+  </script>
+{% endblock %}
